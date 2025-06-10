@@ -1,0 +1,21 @@
+ul{
+    list-style: none;
+}
+
+.container{
+    border: 1px solid black;
+    width: 300px;
+    margin-top: 40px;
+}
+
+button{
+    border: none;
+    background-color: rgb(80, 80, 245);
+    color: white;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+
+.active{
+    display: none;
+}
