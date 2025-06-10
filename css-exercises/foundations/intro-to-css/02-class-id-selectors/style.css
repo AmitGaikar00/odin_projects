@@ -1,0 +1,19 @@
+p {
+  background-color: lightpink;
+  font-family: Verdana, "DejaVu Sans", sans-serif;
+}
+
+p:nth-child(3){
+    font-size: 24px;
+}
+
+.second{
+    color: blue;
+    font-size: 36px;
+}
+
+div.four{
+    background-color: lightgreen;
+    font-weight: bold;
+    font-size: 24px;
+}

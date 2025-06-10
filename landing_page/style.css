@@ -1,0 +1,160 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+header {
+  background-color: #1f2937;
+  color: #f9faf8;
+  display: flex;
+  padding: 20px 100px;
+  justify-content: space-between;
+}
+
+header h1 {
+  font-size: 24px;
+}
+
+header ul {
+  list-style-type: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  gap: 16px;
+}
+li {
+  font-size: 18px;
+}
+a {
+  color: #e5e7eb;
+  text-decoration: none;
+}
+
+.hero {
+  background-color: #1f2937;
+  display: flex;
+  padding: 150px 100px;
+  gap: 16px;
+}
+
+.hero__left h1 {
+  font-size: 48px;
+  color: #f9faf8;
+  font-weight: 900;
+}
+
+.hero__left p {
+  font-size: 18px;
+  color: #e5e7eb;
+}
+.hero__left button {
+  background-color: #3882f6;
+  border-radius: 10px;
+  font-size: 18px;
+  padding: 8px 26px;
+  margin-top: 16px;
+  color: white;
+}
+
+.hero__right {
+  background-color: slategrey;
+  width: 50%;
+  flex-shrink: 0;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner {
+  padding: 50px 100px 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.banner__heading {
+  text-align: center;
+}
+
+.banner__cards {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  align-items: center;
+}
+
+.card__box {
+  width: 160px;
+  height: 160px;
+  border: 5px solid #3882f6;
+  border-radius: 10px;
+}
+
+.card p {
+  max-width: 150px;
+  color: gray;
+}
+
+.quote {
+  background-color: #e5e7eb;
+  padding: 100px 250px;
+}
+
+.quote__heading {
+  font-size: 36px;
+  color: #1f2937;
+  font-style: italic;
+  font-weight: 300;
+}
+
+.quote__author {
+  font-weight: 900;
+  display: flex;
+
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.contact {
+  padding: 100px;
+}
+
+.contact__content {
+  display: flex;
+  color: white;
+  padding: 50px 150px;
+  background-color: #3882f6;
+  justify-content: space-between;
+}
+
+.contact__content__left p {
+  font-weight: 100;
+}
+
+.contact__content__right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.contact__content__right button {
+  color: white;
+  background-color: #3882f6;
+  border: 2px solid white;
+  padding: 8px 50px;
+  border-radius: 5px;
+}
+
+footer {
+  background-color: #1f2937;
+  color: white;
+  padding: 30px 100px;
+  text-align: center;
+}
+
+footer h3 {
+  font-weight: 200;
+}

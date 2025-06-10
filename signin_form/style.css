@@ -1,0 +1,231 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+:root {
+  --primary-color: #2ecc71;
+  --primary-hover: #27ae60;
+  --text-color: #333;
+  --gray-light: #f0f0f0;
+  --gray-medium: #666;
+  --transition: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  color: var(--text-color);
+  line-height: 1.6;
+}
+
+.container {
+  display: flex;
+  min-height: 100vh;
+}
+
+.image {
+  flex: 1;
+  position: relative;
+}
+
+.image > .nature > img {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+.image .logo {
+  position: absolute;
+  top: 20%;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  padding: 2rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  backdrop-filter: blur(5px);
+  transition: var(--transition);
+}
+
+.image .logo:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.image .logo > img {
+  width: 100px;
+  height: 100px;
+  filter: drop-shadow(0 0 10px rgba(0,0,0,0.3));
+}
+
+.image .logo > h2 {
+  color: white;
+  letter-spacing: 0.4em;
+  width: 100px;
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.form {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  padding: 3rem;
+  background-color: #fff;
+  box-shadow: 0 0 20px rgba(0,0,0,0.05);
+}
+
+.form > h1 {
+  max-width: 900px;
+  margin-bottom: 1.5rem;
+  color: var(--text-color);
+  font-size: 2.5rem;
+}
+
+form {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.form__content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  padding-top: 20px;
+  max-width: 1200px;
+}
+
+.form__content > div {
+  flex: 1;
+  min-width: 250px;
+}
+
+.form__row {
+  display: flex;
+  gap: 30px;
+  width: 100%;
+}
+
+.form__row > div {
+  flex: 1;
+}
+
+.form__content .child {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+label {
+  color: var(--gray-medium);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+input {
+  height: 2.5rem;
+  padding: 0 1rem;
+  border: 2px solid var(--gray-light);
+  border-radius: 4px;
+  outline: none;
+  transition: var(--transition);
+  font-size: 1rem;
+}
+
+input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 4px rgba(46, 204, 113, 0.1);
+}
+
+input:hover {
+  border-color: var(--primary-hover);
+}
+
+button {
+  color: white;
+  background-color: var(--primary-color);
+  border: none;
+  padding: 12px 30px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: var(--transition);
+  margin-top: 20px;
+  width: fit-content;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+button:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+strong {
+  color: var(--primary-color);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .container {
+    flex-direction: column;
+  }
+  
+  .image > .nature > img {
+    height: 300px;
+  }
+  
+  .image .logo {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .form {
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .form {
+    padding: 1.5rem;
+  }
+  
+  .form > h1 {
+    font-size: 2rem;
+  }
+  
+  .image .logo > img {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .image .logo > h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .form__row {
+    flex-direction: column;
+  }
+  
+  .form__content > div {
+    min-width: 100%;
+  }
+}

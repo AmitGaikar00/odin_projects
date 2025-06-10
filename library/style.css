@@ -1,0 +1,133 @@
+body {
+  font-family: Arial, sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+
+.new-book {
+  background-color: #4caf50;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.new-book:hover {
+  background-color: #45a049;
+}
+
+.new-book-form {
+  display: none;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  max-width: 400px;
+}
+
+.new-book-form label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.new-book-form input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.new-book-form input[type="checkbox"] {
+  margin-bottom: 15px;
+}
+
+.new-book-form button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.new-book-form button[type="submit"] {
+  background-color: #4caf50;
+  color: white;
+}
+
+.cancel {
+  background-color: #f44336;
+  color: white;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.book {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid #4caf50;
+}
+
+.book h2 {
+  margin-top: 0;
+  color: #333;
+}
+
+.book p {
+  margin: 10px 0;
+  color: #666;
+}
+
+.book button {
+  padding: 8px 16px;
+  margin-right: 10px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.remove {
+  background-color: #f44336;
+  color: white;
+}
+
+.remove:hover {
+  background-color: #da190b;
+}
+
+.read {
+  background-color: #008cba;
+  color: white;
+}
+
+.read:hover {
+  background-color: #007b9a;
+}
+
+.read-status {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.read-true {
+  color: #4caf50;
+}
+
+.read-false {
+  color: #f44336;
+}
