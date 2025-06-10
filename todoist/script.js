@@ -4,10 +4,9 @@ function Todo() {
   let description = "";
   let priority = "";
   let dueDate = "";
-  let isCompleted = false;
 
   const getTodo = () => {
-    return { id, title, description, priority, dueDate, isCompleted };
+    return { id, title, description, priority, dueDate };
   };
 
   const setTodo = (todoData) => {
@@ -16,7 +15,6 @@ function Todo() {
     description = todoData.description;
     priority = todoData.priority;
     dueDate = todoData.dueDate;
-    isCompleted = todoData.isCompleted;
   };
 
   const putTodo = (todoData) => {
@@ -24,7 +22,6 @@ function Todo() {
     description = todoData.description;
     priority = todoData.priority;
     dueDate = todoData.dueDate;
-    isCompleted = todoData.isCompleted;
   };
 
   return { getTodo, setTodo, putTodo };
@@ -247,11 +244,7 @@ function screenController() {
       div.dataset.id = tdData.id;
       div.innerHTML = `
       <div class="todo__heading">
-           ${
-             tdData.isCompleted
-               ? '<input type="checkbox" name="iscompleted" id="" checked  />'
-               : '<input type="checkbox" name="iscompleted" id="" />'
-           }
+          
            <h3>${tdData.title}</h3>
       </div>
             <p>${tdData.description}</p>
@@ -275,17 +268,6 @@ function screenController() {
         console.log("Edit clicked for ID:", tdData.id);
         editClickedTodo(tdData.id);
         // You can add your edit logic here later
-        saveAllListsToStorage();
-      };
-
-      // add event listener to checkbox
-      div.querySelector('input[name="iscompleted"]').onchange = (e) => {
-        console.log("Checkbox changed for ID:", e.target.checked);
-        todoControllers[currentCategory].updateTodo(tdData.id, {
-          ...tdData,
-          isCompleted: e.target.checked,
-        });
-
         saveAllListsToStorage();
       };
 
