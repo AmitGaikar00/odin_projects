@@ -14,8 +14,8 @@
       <input type="text" name="title" placeholder="Title" required />
       <input type="text" name="description" placeholder="Description" />
       <input type="date" name="duedate" placeholder="Due Date" required />
-      <!-- <input type="text" name="priority" placeholder="Priority" /> -->
       <select name="priority">
+        <option value="" disabled selected>Select priority</option>
         <option value="low">LOW</option>
         <option value="medium">MEDIUM</option>
         <option value="high">HIGH</option>
@@ -29,11 +29,12 @@
         <h1>Todoist</h1>
         <nav>
           <ul>
-            <li>Personal</li>
-            <li>College</li>
-            <li>Office</li>
+            <li data-name="Personal" class="active">Personal</li>
+
+            <!-- new list will be added here -->
           </ul>
         </nav>
+        <button class="create-list">+</button>
       </div>
       <div class="content">
         <div class="content__heading">

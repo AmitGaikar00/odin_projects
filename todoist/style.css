@@ -22,10 +22,18 @@ body {
   background-color: #fcfaf8;
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
-  /* justify-content: space-between; */
   gap: 20px;
   padding: 10px 30px;
+}
+
+.sidebar .create-list{
+    background-color: indianred;
+    border: none;
+    color: white;
+    padding:5px;
+    font-size: 1rem;
+    cursor: pointer;
+
 }
 
 ul {
@@ -35,15 +43,18 @@ ul {
   gap: 20px;
 }
 
-li:first-child {
+li.active {
   background-color: #f1b7b2;
 }
 
 li {
   padding: 5px;
+  padding-left: 10px;
   border-radius: 5px;
   cursor: pointer;
+  border: 1px solid black;
 }
+
 
 /* --------------------------------------------- */
 .overlay {

@@ -1,11 +1,13 @@
-const readline = require('readline')
+const data = {
+  person : "amit"
+}
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-})
+let name = 'parth'
+data.name = "what ok"
 
+// console.log(data)
 
-rl.question("what iss your name" , name =>{
-  console.log(`so your name is ${name}`)
-})
+for ( let name in data ) {
+  console.log(name)
+  console.log(data[name])
+}

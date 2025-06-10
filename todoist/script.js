@@ -35,6 +35,8 @@ function TodoController() {
 
   const getTodoList = () => todoList;
 
+  const setTodoList = (newTodoList) => (todoList = newTodoList);
+
   const printTodoList = () => {
     const printTodoList = todoList.map((td) => td.getTodo());
 
@@ -61,20 +63,77 @@ function TodoController() {
     todoList = todoList.filter((td) => td.getTodo().id !== id);
   };
 
-  return { getTodoList, printTodoList, createTodo, updateTodo, deleteTodo };
+  return {
+    getTodoList,
+    printTodoList,
+    createTodo,
+    updateTodo,
+    deleteTodo,
+    setTodoList,
+  };
 }
 
 // ------------------------------------------------
 
 function screenController() {
+  const todoControllers = {
+    Personal: TodoController(),
+  };
+  let currentCategory = "Personal";
   let editingId = "";
-  // create new todolist for personal
-  const personal = TodoController();
 
+  // divs and buttons
   const create_button = document.querySelector(".create_todo");
   const form = document.querySelector("form");
   const overlayDiv = document.querySelector(".overlay");
   const contentDiv = document.querySelector(".content__body");
+  const createListButton = document.querySelector(".create-list");
+  const sidebarListNav = document.querySelector(".sidebar nav ul");
+  const todoListHeading = document.querySelector(".content__heading h1");
+
+  // added event listeners for toggling form
+  create_button.onclick = () => {
+    editingId = "";
+    form.reset();
+    toggleForm();
+  };
+  overlayDiv.onclick = toggleForm;
+  createListButton.onclick = createnewList;
+
+  function loadAllListsFromStorage() {
+    const savedLists = JSON.parse(localStorage.getItem("allTodoLists")) || {};
+
+    for (let name in savedLists) {
+      const controller = TodoController();
+      savedLists[name].forEach((td) => {
+        const todo = Todo();
+        todo.setTodo(td);
+        controller.setTodoList([...controller.getTodoList(), todo]);
+      });
+
+      todoControllers[name] = controller;
+
+      if (name !== "Personal") {
+        const li = document.createElement("li");
+        li.textContent = name;
+        li.dataset.name = name;
+        sidebarListNav.appendChild(li);
+        addClickEventListenerToList(li);
+      }
+    }
+  }
+
+  function saveAllListsToStorage() {
+    const allData = {};
+
+    for (let name in todoControllers) {
+      allData[name] = todoControllers[name]
+        .getTodoList()
+        .map((td) => td.getTodo());
+    }
+
+    localStorage.setItem("allTodoLists", JSON.stringify(allData));
+  }
 
   // form toggle function
   function toggleForm() {
@@ -89,20 +148,54 @@ function screenController() {
     overlayDiv.classList.toggle("active");
   }
 
-  // added event listeners for toggling form
-  create_button.onclick = () => {
-    editingId = "";
-    form.reset();
-    toggleForm();
-  };
-  overlayDiv.onclick = toggleForm;
+  function createnewList() {
+    const newListName = prompt("Enter list name");
+
+    if (!newListName) {
+      return;
+    }
+
+    if (todoControllers[newListName]) {
+      alert("List already exists");
+      return;
+    }
+
+    // create new list in controller
+    todoControllers[newListName] = TodoController();
+
+    // add new list to nav li
+    const li = document.createElement("li");
+    li.innerHTML = newListName;
+    li.dataset.name = newListName;
+
+    addClickEventListenerToList(li);
+    sidebarListNav.appendChild(li);
+    // add new list to local storage
+    saveAllListsToStorage();
+  }
+
+  function addClickEventListenerToList(li) {
+    li.onclick = () => {
+      currentCategory = li.dataset.name;
+
+      // console.log(sidebarListNav)
+      sidebarListNav.querySelectorAll("li").forEach((li) => {
+        li.classList.remove("active");
+      });
+
+      li.classList.add("active");
+
+      updateScreen();
+      todoListHeading.textContent = currentCategory;
+    };
+  }
 
   // show and update screen
   const updateScreen = () => {
     // clear screen before rerender
     contentDiv.innerHTML = "";
 
-    personal.getTodoList().forEach((td) => {
+    todoControllers[currentCategory].getTodoList().forEach((td) => {
       const tdData = td.getTodo();
       const div = document.createElement("div");
       div.classList.add("todo");
@@ -138,14 +231,28 @@ function screenController() {
 
       // Add event listeners to the edit and delete buttons
       div.querySelector('button[name="delete"]').onclick = (e) => {
-        personal.deleteTodo(tdData.id);
+        todoControllers[currentCategory].deleteTodo(tdData.id);
         updateScreen(); // re-render the screen
+
+        // after deleting todo, save to local storage
+        saveAllListsToStorage();
       };
 
       div.querySelector('button[name="edit"]').onclick = (e) => {
         console.log("Edit clicked for ID:", tdData.id);
         editClickedTodo(tdData.id);
         // You can add your edit logic here later
+      };
+
+      // add event listener to checkbox
+      div.querySelector('input[name="iscompleted"]').onchange = (e) => {
+        console.log("Checkbox changed for ID:", e.target.checked);
+        todoControllers[currentCategory].updateTodo(tdData.id, {
+          ...tdData,
+          isCompleted: e.target.checked,
+        });
+
+        saveAllListsToStorage();
       };
 
       contentDiv.appendChild(div);
@@ -160,17 +267,27 @@ function screenController() {
       const description = form.querySelector("input[name=description]").value;
       const priority = form.querySelector("select[name=priority]").value;
       const dueDate = form.querySelector("input[name=duedate]").value;
+      const isCompleted = document.querySelector(
+        "input[name=iscompleted]"
+      ).checked;
 
       console.log({ title, description, priority, dueDate });
 
       if (editingId === "") {
-        personal.createTodo({ title, description, priority, dueDate });
-      } else {
-        personal.updateTodo(editingId, {
+        todoControllers[currentCategory].createTodo({
           title,
           description,
           priority,
           dueDate,
+          isCompleted,
+        });
+      } else {
+        todoControllers[currentCategory].updateTodo(editingId, {
+          title,
+          description,
+          priority,
+          dueDate,
+          isCompleted,
         });
 
         // reset edit id
@@ -181,6 +298,10 @@ function screenController() {
       toggleForm();
 
       updateScreen();
+
+      // after creating and updting todo, save to local storage
+
+      saveAllListsToStorage();
     };
   };
 
@@ -191,7 +312,7 @@ function screenController() {
     const priority = form.querySelector("select[name=priority]");
     const dueDate = form.querySelector("input[name=duedate]");
 
-    const td = personal
+    const td = todoControllers[currentCategory]
       .getTodoList()
       .find((ele) => ele.getTodo().id === id)
       .getTodo();
@@ -205,6 +326,12 @@ function screenController() {
     toggleForm();
   };
 
+  // add active li to personal default list
+  addClickEventListenerToList(
+    sidebarListNav.querySelector('li[data-name="Personal"]')
+  );
+
+  loadAllListsFromStorage();
   updateScreen();
   createNewTodo();
 }
