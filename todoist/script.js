@@ -115,7 +115,12 @@ function screenController() {
 
       if (name !== "Personal") {
         const li = document.createElement("li");
-        li.textContent = name;
+        // li.textContent = name;
+        li.innerHTML = `
+                      <span>${name}</span>
+                      <button class="delete-list">X</button>
+                       `;
+
         li.dataset.name = name;
         sidebarListNav.appendChild(li);
         addClickEventListenerToList(li);
@@ -165,8 +170,12 @@ function screenController() {
 
     // add new list to nav li
     const li = document.createElement("li");
-    li.innerHTML = newListName;
+    // li.innerHTML = newListName;
     li.dataset.name = newListName;
+    li.innerHTML = `
+    <span>${newListName}</span>
+    <button class="delete-list">X</button>
+  `;
 
     addClickEventListenerToList(li);
     sidebarListNav.appendChild(li);
@@ -175,19 +184,43 @@ function screenController() {
   }
 
   function addClickEventListenerToList(li) {
-    li.onclick = () => {
+    const span = li.querySelector("span");
+    const deleteBtn = li.querySelector("button.delete-list");
+
+    // Switch list when span (name) is clicked
+    span.onclick = () => {
       currentCategory = li.dataset.name;
 
-      // console.log(sidebarListNav)
       sidebarListNav.querySelectorAll("li").forEach((li) => {
         li.classList.remove("active");
       });
 
       li.classList.add("active");
-
       updateScreen();
       todoListHeading.textContent = currentCategory;
     };
+
+    // Delete list when delete button is clicked
+    if (deleteBtn) {
+      deleteBtn.onclick = (e) => {
+        e.stopPropagation(); // prevent triggering span click
+        const listName = li.dataset.name;
+
+        if (confirm(`Are you sure you want to delete list "${listName}"?`)) {
+          delete todoControllers[listName];
+          li.remove();
+
+          // Set currentCategory to Personal and update screen
+          currentCategory = "Personal";
+          sidebarListNav
+            .querySelector('li[data-name="Personal"]')
+            .classList.add("active");
+
+          updateScreen();
+          saveAllListsToStorage();
+        }
+      };
+    }
   }
 
   // show and update screen
@@ -242,6 +275,7 @@ function screenController() {
         console.log("Edit clicked for ID:", tdData.id);
         editClickedTodo(tdData.id);
         // You can add your edit logic here later
+        saveAllListsToStorage();
       };
 
       // add event listener to checkbox
@@ -267,9 +301,6 @@ function screenController() {
       const description = form.querySelector("input[name=description]").value;
       const priority = form.querySelector("select[name=priority]").value;
       const dueDate = form.querySelector("input[name=duedate]").value;
-      const isCompleted = document.querySelector(
-        "input[name=iscompleted]"
-      ).checked;
 
       console.log({ title, description, priority, dueDate });
 
@@ -279,7 +310,6 @@ function screenController() {
           description,
           priority,
           dueDate,
-          isCompleted,
         });
       } else {
         todoControllers[currentCategory].updateTodo(editingId, {
@@ -287,7 +317,6 @@ function screenController() {
           description,
           priority,
           dueDate,
-          isCompleted,
         });
 
         // reset edit id
