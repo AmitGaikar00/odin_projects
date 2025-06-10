@@ -64,84 +64,149 @@ function TodoController() {
   return { getTodoList, printTodoList, createTodo, updateTodo, deleteTodo };
 }
 
-const personal = TodoController();
-
-personal.printTodoList();
-
-personal.createTodo({
-  title: "amit",
-  description:
-    "lorem sdlgjg aldj sglfgj dlfj gdfl gdfljg ldjfgl dkjlfgj dljfg ",
-  priority: "low",
-  dueDate: new Date().getTime(),
-  isCompleted: false,
-});
-
-personal.createTodo({
-  title: "parth",
-  description:
-    "lorem sdlgjg aldj sglfgj dlfj gdfl gdfljg ldjfgl dkjlfgj dljfg ",
-  priority: "high",
-  dueDate: new Date().getTime(),
-  isCompleted: false,
-});
-
-personal.createTodo({
-  title: "parth",
-  description:
-    "lorem sdlgjg aldj sglfgj dlfj gdfl gdfljg ldjfgl dkjlfgj dljfg ",
-  priority: "medium",
-  dueDate: new Date().getTime(),
-  isCompleted: false,
-});
-
-personal.printTodoList();
-
 // ------------------------------------------------
 
-const create_button = document.querySelector(".create_todo");
-const form = document.querySelector("form");
-const overlayDiv = document.querySelector(".overlay");
+function screenController() {
+  let editingId = "";
+  // create new todolist for personal
+  const personal = TodoController();
 
-function toggleForm() {
-  form.classList.toggle("active");
-  overlayDiv.classList.toggle("active");
-}
-create_button.onclick = toggleForm;
-overlayDiv.onclick = toggleForm;
+  const create_button = document.querySelector(".create_todo");
+  const form = document.querySelector("form");
+  const overlayDiv = document.querySelector(".overlay");
+  const contentDiv = document.querySelector(".content__body");
 
-// shows todos
-const contentDiv = document.querySelector(".content__body");
+  // form toggle function
+  function toggleForm() {
+    const form_button = form.querySelector("button[name=submit]");
 
-personal.getTodoList().forEach((td) => {
-  const tdData = td.getTodo();
-  const div = document.createElement("div");
-  div.classList.add("todo");
-
-  let todoBg = "white";
-
-  if (tdData.priority === "low") {
-    todoBg = "#90EE90";
-  } else if (tdData.priority === "medium") {
-    todoBg = "#ADD8E6";
-  } else {
-    todoBg = "#ffdfdf";
+    if (editingId === "") {
+      form_button.innerHTML = "Create";
+    } else {
+      form_button.innerHTML = "Update";
+    }
+    form.classList.toggle("active");
+    overlayDiv.classList.toggle("active");
   }
 
-  div.style.backgroundColor = todoBg;
+  // added event listeners for toggling form
+  create_button.onclick = () => {
+    editingId = "";
+    form.reset();
+    toggleForm();
+  };
+  overlayDiv.onclick = toggleForm;
 
-  div.innerHTML = `
+  // show and update screen
+  const updateScreen = () => {
+    // clear screen before rerender
+    contentDiv.innerHTML = "";
+
+    personal.getTodoList().forEach((td) => {
+      const tdData = td.getTodo();
+      const div = document.createElement("div");
+      div.classList.add("todo");
+
+      let todoBg = "white";
+
+      if (tdData.priority === "low") {
+        todoBg = "#90EE90";
+      } else if (tdData.priority === "medium") {
+        todoBg = "#ADD8E6";
+      } else {
+        todoBg = "#ffdfdf";
+      }
+
+      div.style.backgroundColor = todoBg;
+      div.dataset.id = tdData.id;
+      div.innerHTML = `
       <div class="todo__heading">
-           <input type="checkbox" name="iscompleted" id="" />
+           ${
+             tdData.isCompleted
+               ? '<input type="checkbox" name="iscompleted" id="" checked  />'
+               : '<input type="checkbox" name="iscompleted" id="" />'
+           }
            <h3>${tdData.title}</h3>
       </div>
             <p>${tdData.description}</p>
             <h5>${tdData.dueDate}</h5>
 
       <div class="todo_button">
-            <button name="edit ">Edit</button>
-            <button name="delete" onClick=${console.log("hi")}>Delete</button>
+            <button name="edit" data-id=${tdData.id}>Edit</button>
+            <button name="delete" data-id=${tdData.id}>Delete</button>
       </div>`;
 
-  contentDiv.appendChild(div);
-});
+      // Add event listeners to the edit and delete buttons
+      div.querySelector('button[name="delete"]').onclick = (e) => {
+        personal.deleteTodo(tdData.id);
+        updateScreen(); // re-render the screen
+      };
+
+      div.querySelector('button[name="edit"]').onclick = (e) => {
+        console.log("Edit clicked for ID:", tdData.id);
+        editClickedTodo(tdData.id);
+        // You can add your edit logic here later
+      };
+
+      contentDiv.appendChild(div);
+    });
+  };
+
+  // create new todo and add to personal
+  const createNewTodo = () => {
+    form.onsubmit = (e) => {
+      e.preventDefault();
+      const title = form.querySelector("input[name=title]").value;
+      const description = form.querySelector("input[name=description]").value;
+      const priority = form.querySelector("select[name=priority]").value;
+      const dueDate = form.querySelector("input[name=duedate]").value;
+
+      console.log({ title, description, priority, dueDate });
+
+      if (editingId === "") {
+        personal.createTodo({ title, description, priority, dueDate });
+      } else {
+        personal.updateTodo(editingId, {
+          title,
+          description,
+          priority,
+          dueDate,
+        });
+
+        // reset edit id
+        editingId = "";
+      }
+
+      form.reset();
+      toggleForm();
+
+      updateScreen();
+    };
+  };
+
+  // edit todo and update screen
+  const editClickedTodo = (id) => {
+    const title = form.querySelector("input[name=title]");
+    const description = form.querySelector("input[name=description]");
+    const priority = form.querySelector("select[name=priority]");
+    const dueDate = form.querySelector("input[name=duedate]");
+
+    const td = personal
+      .getTodoList()
+      .find((ele) => ele.getTodo().id === id)
+      .getTodo();
+
+    title.value = td.title;
+    description.value = td.description;
+    priority.value = td.priority;
+    dueDate.value = td.dueDate;
+
+    editingId = id;
+    toggleForm();
+  };
+
+  updateScreen();
+  createNewTodo();
+}
+
+screenController();
