@@ -1,7 +1,3 @@
-/* body {
-  height: 100vh;
-  width: 100vw;
-} */
 
 * {
   box-sizing: border-box;
@@ -76,16 +72,17 @@ img {
   height: 15px;
   border-radius: 100%;
   background-color: gray;
+  cursor: pointer;
 }
 
-.active{
-    background-color: black;
+.active {
+  background-color: black;
 }
 
-.mySlides{
-    display: none;
+.mySlides {
+  display: none;
 }
 
-.show{
-    display: block;
+.show {
+  display: block;
 }
