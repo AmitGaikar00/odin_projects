@@ -3,4 +3,4 @@ node_modules/
 # Ignore build directories.
 /build
 /dist
-
+.env
