@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todoist</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="#" />
+  </head>
+  <body>
+    <div class="overlay"></div>
+
+    <form>
+      <input type="text" name="title" placeholder="Title" required />
+      <input type="text" name="description" placeholder="Description" />
+      <input type="date" name="duedate" placeholder="Due Date" required />
+      <select name="priority">
+        <option value="" disabled selected>Select priority</option>
+        <option value="low">LOW</option>
+        <option value="medium">MEDIUM</option>
+        <option value="high">HIGH</option>
+      </select>
+
+      <button type="submit" name="submit">Create</button>
+    </form>
+
+    <div class="container">
+      <div class="sidebar">
+        <h1>Todoist</h1>
+        <nav>
+          <ul>
+            <li data-name="Personal" class="active"><span> Personal </span></li>
+
+            <!-- new list will be added here -->
+          </ul>
+        </nav>
+        <button class="create-list">+</button>
+      </div>
+      <div class="content">
+        <div class="content__heading">
+          <h1>Personal</h1>
+          <button class="create_todo">+</button>
+        </div>
+
+        <div class="content__body">
+          <!-- // todos  -->
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+  </body>
+</html>
