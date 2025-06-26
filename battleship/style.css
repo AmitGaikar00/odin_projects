@@ -1,0 +1,67 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  padding-inline: 40px;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
+  gap: 150px;
+}
+
+.player__grid , .computer__grid {
+  width: 300px;
+  height: 300px;
+  border: 1px solid blue;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+.cube {
+  width: 30px;
+  height: 30px;
+  border: 1px solid lightblue;
+  box-sizing: border-box;
+}
+
+.ship {
+  background-color: #444;
+  border: 1px solid lightblue;
+}
+
+.hit {
+  background-color: red;
+  border: 1px solid lightblue;
+}
+
+.miss {
+  background-color: lightblue;
+  border: 1px solid lightblue;
+}
+
+button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+button:hover{
+  background-color: rgb(241, 200, 200);
+}
+.buttons{
+  display: flex;
+  justify-content: center;
+}
+
+

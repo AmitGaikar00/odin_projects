@@ -1,4 +1,4 @@
-import { Ship, Gameboard } from "./game";
+import { Ship, Gameboard, Player } from "./gameClasses";
 
 describe("ship class", () => {
   test("ship should initialize with length provided and isSunk should be false", () => {
@@ -53,5 +53,14 @@ describe("battleship game board", () => {
     expect(board.allShipsSunk()).toBe(false);
     board.receiveAttack([0, 0]);
     expect(board.allShipsSunk()).toBe(true);
+  });
+});
+
+describe("player class", () => {
+  test("player should be real or computer", () => {
+    const pl = new Player("real");
+    const pl2 = new Player("computer");
+    expect(pl.playerType).toBe("real");
+    expect(pl2.playerType).toBe("computer");
   });
 });
