@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="365d11da-eb2c-48d9-9f32-18802084e8d7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/admin_dashboard/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/admin_dashboard/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css-exercises/advanced-html-css/animation/01-button-hover/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css-exercises/advanced-html-css/animation/01-button-hover/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css-exercises/advanced-html-css/animation/02-pop-up/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css-exercises/advanced-html-css/animation/02-pop-up/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css-exercises/advanced-html-css/animation/03-dropdown-menu/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/css-exercises/advanced-html-css/animation/03-dropdown-menu/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dsa.js" beforeDir="false" afterPath="$PROJECT_DIR$/dsa.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tempCodeRunnerFile.js" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 3
+}]]></component>
+  <component name="ProjectId" id="30fg9KBa2Tvtk1y1e4Og4KqAHyD" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Node.js.dsa.js.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-b26f3e71634d-JavaScript-WS-251.26094.131" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="365d11da-eb2c-48d9-9f32-18802084e8d7" name="Changes" comment="" />
+      <created>1754023890028</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1754023890028</updated>
+      <workItem from="1754023892346" duration="124000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
